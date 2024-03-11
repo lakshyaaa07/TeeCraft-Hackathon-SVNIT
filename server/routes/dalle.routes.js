@@ -29,6 +29,7 @@ router.route('/').post(async (req, res) => {
 
         if (response && response.data && Array.isArray(response.data) && response.data.length > 0) {
             const imageBase64JSON = response.data[0].b64_json;
+            console.log(imageBase64JSON);
             try {
                 const imageData = JSON.parse(imageBase64JSON); // Parse the JSON string
                 if (imageData && imageData.b64) {
