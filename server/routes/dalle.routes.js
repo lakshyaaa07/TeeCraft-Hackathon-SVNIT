@@ -40,7 +40,11 @@ router.route('/').post(async (req, res) => {
                 }
             } catch (parseError) {
                 console.error("Failed to parse JSON:", parseError);
-                res.status(500).json({ message: "Failed to parse JSON" });
+                if (parseError instanceof SyntaxError) {
+                    res.status(500).json({ message: "Unexpected response format from OpenAI API" });
+                } else {
+                    res.status(500).json({ message: "Failed to parse JSON" });
+                }
             }
         } else {
             console.error("Invalid response format");
