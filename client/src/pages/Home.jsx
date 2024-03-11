@@ -35,12 +35,7 @@ const Home = () => {
                                     className='flex flex-col gap-5'
                         >
                             <p className='max-w-md font-normal text-gray-600 text- 
-                             base'>Lorem ipsum dolor sit amet consectetur 
-                                 adipisicing   
-                                 elit. Itaque reprehenderit repudiandae sapiente 
-                                 beatae temporibus veritatis, 
-                                 recusandae voluptates? <strong> Accusamus, hic sed  
-                                </strong> and consectetur adipisicing   
+                             base'>Whether you're looking to make a bold fashion statement, commemorate a special occasion, or promote your brand, our platform offers endless possibilities. Choose from a wide range of colors, fonts, graphics, and <strong> styles to design T-shirts that reflect your unique personality</strong> and vision.  
                                  elit</p>
 
                                  <CustomButton
