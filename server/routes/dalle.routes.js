@@ -16,7 +16,7 @@ router.route('/').get((req, res) => {
 
 router.route('/').post(async (req, res) => {
     try {
-        const { prompt } = req.body;
+        const { prompt } = "a lion";
 
         const response = await openai.images.generate({
             prompt,
@@ -31,7 +31,7 @@ router.route('/').post(async (req, res) => {
             const imageBase64JSON = response.data[0].b64_json;
             console.log(imageBase64JSON);
             try {
-                const imageData = JSON.parse(imageBase64JSON); // Parse the JSON string
+                const imageData = JSON.parse(atob(imageBase64JSON)); // Parse the JSON string
                 if (imageData && imageData.b64) {
                     const imageBase64 = imageData.b64; // Extract the base64 encoded image data
                     res.status(200).json({ photo: imageBase64 });
