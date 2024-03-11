@@ -29,10 +29,19 @@ router.route('/').post(async (req, res) => {
 
         if (response && response.data && Array.isArray(response.data) && response.data.length > 0) {
             const imageBase64JSON = response.data[0].b64_json;
-            const imageData = JSON.parse(imageBase64JSON); // Parse the JSON string
-            const imageBase64 = imageData.b64; // Extract the base64 encoded image data
-
-            res.status(200).json({ photo: imageBase64 });
+            try {
+                const imageData = JSON.parse(imageBase64JSON); // Parse the JSON string
+                if (imageData && imageData.b64) {
+                    const imageBase64 = imageData.b64; // Extract the base64 encoded image data
+                    res.status(200).json({ photo: imageBase64 });
+                } else {
+                    console.error("Invalid image data format");
+                    res.status(500).json({ message: "Invalid image data format" });
+                }
+            } catch (parseError) {
+                console.error("Failed to parse JSON:", parseError);
+                res.status(500).json({ message: "Failed to parse JSON" });
+            }
         } else {
             console.error("Invalid response format");
             res.status(500).json({ message: "Invalid response format" });
