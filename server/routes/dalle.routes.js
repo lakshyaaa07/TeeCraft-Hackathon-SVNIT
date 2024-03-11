@@ -25,13 +25,19 @@ router.route('/').post(async (req, res) => {
       response_format: 'b64_json'
     });
 
-    const image = response.data.data[0].b64_json;
+    console.log("Response:", response);
 
-    res.status(200).json({ photo: image });
+    if (response && response.data && response.data.data && Array.isArray(response.data.data) && response.data.data.length > 0) {
+      const image = response.data.data[0].b64_json;
+      res.status(200).json({ photo: image });
+    } else {
+      console.error("Invalid response format");
+      res.status(500).json({ message: "Invalid response format" });
+    }
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Something went wrong" })
+    res.status(500).json({ message: "Something went wrong" });
   }
-})
+});
 
 export default router;
